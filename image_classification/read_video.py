@@ -3,6 +3,7 @@ import cv2
 from tqdm.auto import tqdm
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
+from torch.utils.data import random_split
 
 
 def _doc_video_image_folder(input_folder: str, output_folder: str):
@@ -20,9 +21,24 @@ def _doc_video_image_folder(input_folder: str, output_folder: str):
 
                 if os.path.abspath(root).lower().count("live") != 0:
                     img_class = "live"
-                else:
-                    img_class = "spoof"
-                output_subfolder = os.path.join(output_folder, img_class)
+                elif os.path.abspath(root).lower().count("cutout") != 0:
+                    img_class = "cutout"
+                elif os.path.abspath(root).lower().count("mask") != 0:
+                    img_class = "mask"
+                elif os.path.abspath(root).lower().count("mask3d") != 0:
+                    img_class = "mask3d"
+                elif os.path.abspath(root).lower().count("monitor") != 0:
+                    img_class = "monitor"
+                elif os.path.abspath(root).lower().count("outline") != 0:
+                    img_class = "outline"
+                elif os.path.abspath(root).lower().count("outline3d") != 0:
+                    img_class = "outline3d"
+                elif os.path.abspath(root).lower().count("PC_Replay") != 0:
+                    img_class = "PC_Replay"
+                elif os.path.abspath(root).lower().count("Print_Attacks_Samples") != 0:
+                    img_class = "Print_Attacks_Samples"
+                elif os.path.abspath(root).lower().count("Smartphone_Replay") != 0:
+                    img_class = "Smartphone_Replay"
                 os.makedirs(output_subfolder, exist_ok=True)
 
                 output_path = f"{os.path.join(output_subfolder, file)}.jpg"
@@ -37,10 +53,25 @@ def _doc_video_image_folder(input_folder: str, output_folder: str):
                 if flag:
                     if os.path.abspath(root).lower().count("live") != 0:
                         img_class = "live"
-                    else:
-                        img_class = "spoof"
+                    elif os.path.abspath(root).lower().count("cutout") != 0:
+                        img_class = "cutout"
+                    elif os.path.abspath(root).lower().count("mask") != 0:
+                        img_class = "mask"
+                    elif os.path.abspath(root).lower().count("mask3d") != 0:
+                        img_class = "mask3d"
+                    elif os.path.abspath(root).lower().count("monitor") != 0:
+                        img_class = "monitor"
+                    elif os.path.abspath(root).lower().count("outline") != 0:
+                        img_class = "outline"
+                    elif os.path.abspath(root).lower().count("outline3d") != 0:
+                        img_class = "outline3d"
+                    elif os.path.abspath(root).lower().count("PC_Replay") != 0:
+                        img_class = "PC_Replay"
+                    elif os.path.abspath(root).lower().count("Print_Attacks_Samples") != 0:
+                        img_class = "Print_Attacks_Samples"
+                    elif os.path.abspath(root).lower().count("Smartphone_Replay") != 0:
+                        img_class = "Smartphone_Replay"
                     output_subfolder = os.path.join(output_folder, img_class)
-                    print(output_subfolder)
                     os.makedirs(output_subfolder, exist_ok=True)
 
                     output_path = f"{os.path.join(output_subfolder, file)}.jpg"
@@ -48,8 +79,9 @@ def _doc_video_image_folder(input_folder: str, output_folder: str):
                 cap.release()
 
 
-_doc_video_image_folder(r"E:\Luyen-AIO\test_image", r"E:\Luyen-AIO\hola")
+_doc_video_image_folder(
+    r"D:\publics_data_train\publics_data_train", "data")
 
-dataset = ImageFolder(r"E:\Luyen-AIO\hola")
-dataloader = DataLoader(dataset=dataset, batch_size=64, num_workers=4)
-print(dataloader)
+# dataset = ImageFolder("data")
+# dataloader = DataLoader(dataset=dataset, batch_size=64, num_workers=4)
+# print(dataloader)
