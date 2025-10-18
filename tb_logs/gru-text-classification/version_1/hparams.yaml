@@ -1,0 +1,6 @@
+embedding_dim: 128
+hidden_dim: 256
+lr: 0.001
+num_labels: null
+num_layers: 2
+vocab_size: null
