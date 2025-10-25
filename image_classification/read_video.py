@@ -1,9 +1,33 @@
+# =====================
+# Hàm tính ACER cho FAS
 import os
-import cv2
-from tqdm.auto import tqdm
-from torchvision.datasets import ImageFolder
-from torch.utils.data import DataLoader
 from torch.utils.data import random_split
+from torch.utils.data import DataLoader
+from torchvision.datasets import ImageFolder
+from tqdm.auto import tqdm
+import cv2
+
+
+def calculate_acer(y_true, y_pred):
+    """
+    Tính ACER, APCER, BPCER cho bài toán phát hiện giả mạo (FAS).
+    Args:
+        y_true: list hoặc numpy array, ground truth (1: real, 0: attack)
+        y_pred: list hoặc numpy array, prediction (1: real, 0: attack)
+    Returns:
+        acer, apcer, bpcer
+    """
+    import numpy as np
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    # APCER: Attack Presentation Classification Error Rate
+    attack_mask = (y_true == 0)
+    apcer = np.mean(y_pred[attack_mask] == 1) if np.any(attack_mask) else 0.0
+    # BPCER: Bona Fide Presentation Classification Error Rate
+    bona_mask = (y_true == 1)
+    bpcer = np.mean(y_pred[bona_mask] == 0) if np.any(bona_mask) else 0.0
+    acer = (apcer + bpcer) / 2
+    return acer, apcer, bpcer
 
 
 def _doc_video_image_folder(input_folder: str, output_folder: str):
