@@ -26,3 +26,5 @@ Thumbs.db
 /__pycache__/
 *.log
 *.csv
+*.zip
+/IOAI-2025-main/
