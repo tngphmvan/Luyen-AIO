@@ -28,3 +28,5 @@ Thumbs.db
 *.csv
 *.zip
 /IOAI-2025-main/
+/IOAI-2025-shao/
+*.env
