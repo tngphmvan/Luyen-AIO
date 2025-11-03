@@ -21,7 +21,6 @@ Thumbs.db
 /checkpoints/
 /hola/
 *.ckpt
-*.pth
 *.pt
 /__pycache__/
 *.log
@@ -31,4 +30,8 @@ Thumbs.db
 /IOAI-2025-shao/
 *.env
 /noai/
-.txt
+*.txt
+*.pkl
+events.out.tfevents.*
+hparams.*
+/luyen vong mien bac/object_tracking/example_data/
